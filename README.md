@@ -1,1 +1,1 @@
-# manim-adish
+# manim
