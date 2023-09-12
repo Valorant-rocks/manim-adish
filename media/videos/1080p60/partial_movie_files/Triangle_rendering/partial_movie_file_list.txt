@@ -1,0 +1,4 @@
+# This file is used internally by FFMPEG.
+file 'file:C:/Users/Adish/manim-adish/media/videos/1080p60/partial_movie_files/Triangle_rendering/1413466013_500565748_2334632305.mp4'
+file 'file:C:/Users/Adish/manim-adish/media/videos/1080p60/partial_movie_files/Triangle_rendering/1672018281_2037692170_3044804713.mp4'
+file 'file:C:/Users/Adish/manim-adish/media/videos/1080p60/partial_movie_files/Triangle_rendering/1672018281_329969645_3989581673.mp4'
