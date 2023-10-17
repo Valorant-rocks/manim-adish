@@ -1,12 +1,7 @@
 from manim import *
 from pathlib import Path
 
-# Cricle
 # %%manim -qm -v WARNING Intro 
-
-
-# %%manim -qm -v WARNING Intro 
-
 
 
 class Intro(Scene):
@@ -300,10 +295,15 @@ class Intro(Scene):
         noob=ArcBrace(important_signifier)
         noob_=MathTex(r"S=r\theta",font_size=35)
         noob_tex=Tex("Remember that",font_size=35)
-        order=MathTex(r"P_1=rsin(\theta)",font_size=35)
-        order1=MathTex(r"P_2=rtan(\theta)",font_size=35)
+        order=MathTex(r"P_1=r(sin(\theta))",font_size=35)
+        order1=MathTex(r"P_2=r(tan(\theta))",font_size=35)
+        lmao=Tex("Only in radians",font_size=30)
         self.play(Write(noob_.next_to(important_signifier,DOWN)))
         self.play(Write(noob_tex.next_to(noob_,DOWN)))
+        lmao.next_to(noob_,RIGHT)
+        self.play(Write(lmao))
+        lmaoggez=SurroundingRectangle(lmao,buff=0.1)
+        self.play(Create(lmaoggez))
         self.play(Write(order.next_to(noob_tex,DOWN)))
         self.play(Write(order1.next_to(order,DOWN)))
         self.play((ScaleInPlace(mega,2)))
@@ -325,40 +325,65 @@ class Intro(Scene):
         self.play(Transform(tex_4,order))
         self.play(Transform(tex_4_,order1))
         self.play(FadeOut(mega_fuck))
+        dancing=VGroup(tex_4,tex_4_)
+        self.play(FadeOut(dancing))
         self.play(line_important.animate.rotate(PI/2).next_to((order),RIGHT))
         self.play(line_important_.animate.rotate(PI/2).next_to((order1),RIGHT))
         text_imp=MathTex("=")
         self.play(FadeOut(triangle_tan,alpha_signifier2,arc_important))
         self.play(FadeOut(equation))
+        lmao=Tex(r"Since all of the terms P1,P2 and S contains r, lets just eliminate r since later, we are going to be compairing all these.",font_size=35)
+        lmao.move_to(2*DOWN)
+        self.play(Write(lmao))
+        self.wait(1.5)
+        self.play(FadeOut(lmao))
+
+        noob_1=MathTex(r"S=\theta",font_size=35)
+        noob_1.next_to(important_signifier,DOWN)
+        order_1=MathTex(r"P_1=sin(\theta)",font_size=35)
+        order_1.next_to(noob_tex,DOWN)
+        order1_1=MathTex(r"P_2=tan(\theta)",font_size=35)
+        order1_1.next_to(order,DOWN)
+        self.play(Transform(noob_,noob_1))
+        self.play(Transform(order,order_1))
+        self.play(Transform(order1,order1_1))
+        
         ez=Tex(r"Let's Decrease the angle").move_to(3*RIGHT+3*UP)
         self.play(Write(ez))
 
 
 
-        
+        # Initial value of angular
         angular_tracker = ValueTracker(25)
 
+        # Create DecimalNumber to display angular
        
-        angular_display = DecimalNumber(angular_tracker.get_value(), num_decimal_places=2)
-        angular_display.add_updater(lambda d: d.set_value(angular_tracker.get_value()))
 
-      
+        # Animate the position of the angular display
 
+        # Add a label for the angular display
         
-        angular_label = MathTex(r"\theta =").next_to(angular_display, LEFT)
-        ezDemon1=VGroup(angular_display,angular_label)
 
         tan_display = DecimalNumber(np.tan(np.radians(angular_tracker.get_value())), num_decimal_places=2)
         sin_display = DecimalNumber(np.sin(np.radians(angular_tracker.get_value())), num_decimal_places=2)
 
+# Add updaters to continuously update tan and sin values
         tan_display.add_updater(lambda d: d.set_value(np.tan(np.radians(angular_tracker.get_value()))))
         sin_display.add_updater(lambda d: d.set_value(np.sin(np.radians(angular_tracker.get_value()))))
+        angular_display = DecimalNumber(angular_tracker.get_value(), num_decimal_places=2)
+        angular_display.add_updater(lambda d: d.set_value(angular_tracker.get_value()))
 
-
-        sin_display=sin_display.next_to(ez,DOWN)
+# Position and add the displays to the scene
+        angular_display.next_to(ez,DOWN)
+        angular_label = MathTex(r"\theta =").next_to(angular_display, LEFT)
+        sin_display=sin_display.next_to(angular_display,DOWN)
         tan_display=tan_display.next_to(sin_display,DOWN)
         tan_label = MathTex(r"\tan(\theta) =").next_to(tan_display, LEFT)
         sin_label = MathTex(r"\sin(\theta) =").next_to(sin_display, LEFT)
+
+        
+        
+        ezDemon1=VGroup(angular_display,angular_label)
         
         self.play(Write(angular_label))
         self.play(Write(angular_display))
@@ -375,8 +400,6 @@ class Intro(Scene):
 
 
         
-        angular_display=angular_display.next_to(tan_display,DOWN)
-        angular_label=angular_label.next_to(angular_display,LEFT)
 
         
         
@@ -428,8 +451,23 @@ class Intro(Scene):
         arc_end = [1.437, 6 * np.sin(np.radians(angular))-2, 0]
         return ArcBetweenPoints(start=arc_starting, end=arc_end, angle=np.radians(angular), radius=6)
 
+
+       
+       
+
+        
+        
+
+
+        
+
+        
+        
+        
         self.wait(2)
 
+
+# %%manim -qm -v WARNING Second
 
 class Second(Scene):
     def construct(self):
@@ -523,12 +561,31 @@ class Second(Scene):
         return ArcBetweenPoints(start=arc_starting, end=arc_end, angle=np.radians(angular), radius=6)
     
         
+
+    
+        
+# %%manim -qm -v WARNING third
 class third(Scene):
     def construct(self):
-        w=Tex("Lets look at the different values at 4 random instances in the previous scene",font_size=40)
+
+
+        text = Tex("It is pretty apparent that at nearly all points, value of (Blue Line) is less than the value of S (arc length) which is less than the value of (green line)", font_size=35)
+        text.move_to(2*UP)
+        self.play(Write(text)) 
+        self.wait(1)
+
+        text_=Tex("From that observation the conclusion required can be derived, but for the sake of causality",font_size=35)
+        text_.next_to(text,DOWN)
+        self.play(Write(text_))
+        self.wait(2)
+
+        w=Tex("Lets look at the different values at 4 random instances in the previous scene",font_size=35)
+        w.next_to(text_,DOWN)
         self.play(Write(w))
         self.wait(1.5)
         self.play(FadeOut(w))
+        self.play(FadeOut(text_))
+        self.play(FadeOut(text))
         w1=MathTex(r"\theta(Radian)")
         w2=MathTex(r"sin(\theta)")
         w3=MathTex(r"tan(\theta)")
@@ -562,6 +619,7 @@ class third(Scene):
 
 
 
+# %%manim -qm -v WARNING fourth
 class fourth(Scene):
     def construct(self):
         w_2=MathTex(r"sin(\theta)\leq\theta\leq tan(\theta),",font_size=40)
@@ -635,10 +693,14 @@ class fourth(Scene):
         self.play(Write(remarks))
         self.wait(5)
 
-        ##ggez
-       
 
 
+class Sup(Scene):
+    def construct(self):
+        w_final=MathTex(r"\lim_{\theta\to0}\frac{sin(\theta)}{\theta}     =    1",font_size=100)
+        self.play(Write(w_final))
 
+
+    ##ggez
 
 # %%
